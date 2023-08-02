@@ -52,7 +52,7 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     pool:
-      name:: $(vmImageName)
+      name: $(vmImageName)
     environment: 'bhupati007dotnetdemo-1728.gnb'
     strategy:
       runOnce:

@@ -21,8 +21,6 @@ variables:
   # Agent VM image name
   pool:
     name: self
-
-
 stages:
 - stage: Build
   displayName: Build stage

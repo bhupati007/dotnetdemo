@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: bhupatidotnetdemo 
-          image: berm123.azurecr.io/bhupatidotnetdemo
+          image: mcl123.azurecr.io/bhupatidotnetdemo:latest
           ports:
           - containerPort: 5000

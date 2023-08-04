@@ -65,13 +65,13 @@ stages:
               secretName: $(imagePullSecret)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
 
-- task: HelmDeploy@0
-  inputs:
-    connectionType: 'Azure Resource Manager'
-    azureSubscription: 'Azure subscription 1(3d6943a4-7dba-473c-a241-3881ed39f39a)'
-    azureResourceGroup: 'cluster'
-    kubernetesCluster: 'cluster'
-    namespace: 'mymyproject'
-    command: 'upgrade'
-    chartType: 'FilePath'
-    valueFile: 'values.yaml'
+          - task: HelmDeploy@0
+            inputs:
+              connectionType: 'Azure Resource Manager'
+              azureSubscription: 'Azure subscription 1(3d6943a4-7dba-473c-a241-3881ed39f39a)'
+              azureResourceGroup: 'cluster'
+              kubernetesCluster: 'cluster'
+              namespace: 'mymyproject'
+              command: 'upgrade'
+              chartType: 'FilePath'
+              valueFile: 'values.yaml'

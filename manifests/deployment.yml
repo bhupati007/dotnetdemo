@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: bhupatidotnetdemo 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bhupatidotnetdemo
+  template:
+    metadata:
+      labels:
+        app: bhupatidotnetdemo 
+    spec:
+      containers:
+        - name: bhupatidotnetdemo 
+          image: mcl123.azurecr.io/bhupatidotnetdemo:latest
+          ports:
+          - containerPort: 5000

@@ -73,5 +73,5 @@ stages:
               kubernetesCluster: 'cluster'
               namespace: 'mymyproject'
               command: 'upgrade'
-              chartType: 'FilePath'
+              chartType: '/c/Users/naren/OneDrive/Desktop/CIS/NEW/dotnetdemo/helm-repo/values.yaml'
               valueFile: 'values.yaml'

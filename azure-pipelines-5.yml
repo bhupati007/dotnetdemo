@@ -74,5 +74,5 @@ stages:
               namespace: 'my'
               command: 'upgrade'
               chartType: 'FilePath'
-              chartPath: '/c/Users/naren/OneDrive/Desktop/CIS/NEW/dotnetdemo/helm-repo'
+              chartPath: 'C:\Users\naren\OneDrive\Desktop\CIS\NEW\dotnetdemo\helm-repo'
               valueFile: 'values.yaml'

@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnetdemo
+  namespace: mycluster
+  labels:
+    app: dotnetdemo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dotnetdemo
+  template:
+    metadata:
+      labels:
+        app: dotnetdemo
+        bhupu: agentname   # Added label "bhupu" with value "agentname"
+    spec:
+      nodeSelector:
+        bhupu: agentname   # Node Selector based on the label "bhupu" with value "agentname"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: bhupu
+                operator: In
+                values:
+                - agentname
+          preferredDuringSchedulingIgnoredDuringExecution:   # Preferred Node Affinity
+            - weight: 100   # Weight indicates the preference; higher weight means higher preference
+              preference:
+                matchExpressions:
+                  - key: disk-speed   # Replace "disk-speed" with the label that represents your preferred parameter
+                    operator: In
+                    values:
+                    - ssd   # Replace "ssd" with the value that represents your preferred parameter option (e.g., "ssd")
+      containers:
+      - name: dotnetdemo
+        image: bhupati007/dockerhub-1:edited
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "300Mi"
+          requests:
+            cpu: "100m"
+            memory: "300Mi"
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+        readinessProbe:
+          exec:
+            command:
+            - ls
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+          successThreshold: 1
+        env:
+        - name: ENV_VARIABLE_1
+          valueFrom:
+            configMapKeyRef:
+              name: dotnetdemo-configmap
+              key: ENV_VARIABLE_1
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: dotnetdemo-secret
+              key: SECRET_KEY

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+      annotations:
+        cni.projectcalico.org/podIP: "10.244.0.28/32"
+    spec:
+      serviceAccountName: my-service-account
+      containers:
+      - name: dotnetdemo
+        namespace: mycluster
+        image: bhupati007/dockerhub-1:edited
+        ports:
+        - containerPort: 80
+      tolerations:
+      - key: "pod"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+      affinity:
+         podAffinity:
+           requiredDuringSchedulingIgnoredDuringExecution:
+         - labelSelector:
+               matchExpressions:
+               - key: "app"
+                 operator: In
+                 values:
+                 - myapp
+              topologyKey: "kubernetes.io/hostname"
+        podAntiAffinity:  # Add PodAntiAffinity rules
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: "app"
+                operator: In
+                values:
+                - myapp
+            topologyKey: "kubernetes.io/hostname"

@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
-
+RUN groupadd -g 2000 angular \
+    && useradd -m -u 2000 -g 2000 angular
 RUN apt-get update
 RUN curl -sL https://deb.nodesource.com/setup_16.x  | bash -
 RUN apt-get -y install nodejs

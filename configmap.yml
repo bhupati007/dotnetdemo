@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dotnetdemo-configmap
+  namespace: mycluster
+data:
+  ENV_VARIABLE_1: value1
+  ENV_VARIABLE_2: value2
+
+

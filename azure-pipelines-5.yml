@@ -85,5 +85,5 @@ stages:
               namespace: 'cka'
               command: 'upgrade'
               chartType: 'FilePath'
-              chartPath: 'C:\Users\naren\OneDrive\Desktop\CIS\NEW\dotnetdemo\helm-repo'
+              chartPath: 'helm-repo'
               valueFile: 'values.yaml'
